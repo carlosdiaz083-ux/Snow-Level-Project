@@ -17,76 +17,76 @@ var is_attacking = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-  	if not is_on_floor():
-    		velocity += get_gravity() * delta
+		if not is_on_floor():
+			velocity += get_gravity() * delta
 
-        	# Handle jump.
-          	if Input.is_action_just_pressed("jump") and is_on_floor():
-            		velocity.y = JUMP_VELOCITY
+			# Handle jump.
+				if Input.is_action_just_pressed("jump") and is_on_floor():
+					velocity.y = JUMP_VELOCITY
 
-                	var direction := Input.get_axis("move_left", "move_right")
+					var direction := Input.get_axis("move_left", "move_right")
 
-                  	if direction > 0:
-                    		animated_sprite.flip_h = false
-                        		sword.offset = Vector2(0, 0)
-                            	elif direction < 0:
-                              		animated_sprite.flip_h = true
-                                  		sword.offset = Vector2(28.25, 0)
+						if direction > 0:
+							animated_sprite.flip_h = false
+								sword.offset = Vector2(0, 0)
+								elif direction < 0:
+										animated_sprite.flip_h = true
+											sword.offset = Vector2(28.25, 0)
 
-                                      	if is_on_floor():
-                                        		if direction == 0:
-                                            			animated_sprite.play("idle")
-                                                  		else:
-                                                      			animated_sprite.play("run")
-                                                            	else:
-                                                              		animated_sprite.play("jump")
+											if is_on_floor():
+												if direction == 0:
+														animated_sprite.play("idle")
+															else:
+																	animated_sprite.play("run")
+																else:
+																		animated_sprite.play("jump")
 
-                                                                  	if direction:
-                                                                    		velocity.x = direction * SPEED
-                                                                        	else:
-                                                                          		velocity.x = move_toward(velocity.x, 0, SPEED)
+																		if direction:
+																			velocity.x = direction * SPEED
+																			else:
+																					velocity.x = move_toward(velocity.x, 0, SPEED)
 
-                                                                              	# Weapon attacks
-                                                                                	if Input.is_action_just_pressed("stab") or Input.is_action_just_pressed("swing"):
-                                                                                  		if is_attacking or game_manager.hearts <= 0:
-                                                                                      			return
+																					# Weapon attacks
+																					if Input.is_action_just_pressed("stab") or Input.is_action_just_pressed("swing"):
+																							if is_attacking or game_manager.hearts <= 0:
+																									return
 
-                                                                                            		is_attacking = true
-                                                                                                		sword.visible = false
-                                                                                                    		sword_attacks.visible = true
-                                                                                                        		stab_collision.disabled = false
-                                                                                                            		if animated_sprite.flip_h == true:
-                                                                                                                			sword_attacks.flip_v = true
-                                                                                                                      			sword_attacks.offset = Vector2(0, 35)
-                                                                                                                            			stab_collision.position = Vector2(0, 35)
-                                                                                                                                  
-                                                                                                                                  		if Input.is_action_just_pressed("stab"):
-                                                                                                                                      			sword_attacks.play("stab")
-                                                                                                                                            		if Input.is_action_just_pressed("swing"):
-                                                                                                                                                			sword_attacks.play("swing")
-                                                                                                                                                      
-                                                                                                                                                      	move_and_slide()
-                                                                                                                                                        
-                                                                                                                                                        func _on_sword_attacks_animation_finished() -> void:
-                                                                                                                                                        	sword.visible = true
-                                                                                                                                                          	sword_attacks.visible = false
-                                                                                                                                                            	sword_attacks.flip_v = false
-                                                                                                                                                              	swing_collision.disabled = true
-                                                                                                                                                                	stab_collision.disabled = true
-                                                                                                                                                                  	sword_attacks.offset = Vector2(0, 0)
-                                                                                                                                                                    	swing_collision.position = Vector2(0, 0)
-                                                                                                                                                                      	stab_collision.position = Vector2(0, 0)
-                                                                                                                                                                        	is_attacking = false
-                                                                                                                                                                          
-                                                                                                                                                                          func apply_knockback(hit_position: Vector2):
-                                                                                                                                                                          	var direction = (global_position - hit_position).normalized()
-                                                                                                                                                                            	var force = 500
-                                                                                                                                                                              	var timer = 0.15
-                                                                                                                                                                                	var knockback_velocity = direction * force
-                                                                                                                                                                                  	knockback_velocity.y = -100
-                                                                                                                                                                                    
-                                                                                                                                                                                    	while timer > 0:
-                                                                                                                                                                                      		velocity = knockback_velocity
-                                                                                                                                                                                          		move_and_slide()
-                                                                                                                                                                                              		timer -= get_physics_process_delta_time()
-                                                                                                                                                                                                  		await get_tree().physics_frame
+																									is_attacking = true
+																										sword.visible = false
+																											sword_attacks.visible = true
+																												stab_collision.disabled = false
+																													if animated_sprite.flip_h == true:
+																															sword_attacks.flip_v = true
+																																	sword_attacks.offset = Vector2(0, 35)
+																																		stab_collision.position = Vector2(0, 35)
+																																	
+																																			if Input.is_action_just_pressed("stab"):
+																																					sword_attacks.play("stab")
+																																					if Input.is_action_just_pressed("swing"):
+																																							sword_attacks.play("swing")
+																																						
+																																							move_and_slide()
+																																						
+																																						func _on_sword_attacks_animation_finished() -> void:
+																																							sword.visible = true
+																																								sword_attacks.visible = false
+																																								sword_attacks.flip_v = false
+																																									swing_collision.disabled = true
+																																									stab_collision.disabled = true
+																																										sword_attacks.offset = Vector2(0, 0)
+																																										swing_collision.position = Vector2(0, 0)
+																																											stab_collision.position = Vector2(0, 0)
+																																											is_attacking = false
+																																											
+																																											func apply_knockback(hit_position: Vector2):
+																																												var direction = (global_position - hit_position).normalized()
+																																												var force = 500
+																																													var timer = 0.15
+																																													var knockback_velocity = direction * force
+																																														knockback_velocity.y = -100
+																																													
+																																														while timer > 0:
+																																																velocity = knockback_velocity
+																																																	move_and_slide()
+																																																		timer -= get_physics_process_delta_time()
+																																																			await get_tree().physics_frame
