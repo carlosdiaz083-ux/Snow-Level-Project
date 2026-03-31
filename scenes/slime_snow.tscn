@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=4 uid="uid://snow_slime"]
+
+[ext_resource type="Script" path="res://scripts/slime_snow.gd" id="1_slimescript"]
+[ext_resource type="Texture2D" path="res://assets/sprites/slime_snow.png" id="2_slimetex"]
+
+[node name="Slime_Snow" type="Node2D"]
+script = ExtResource("1_slimescript")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="RayCastRight" type="RayCast2D" parent="AnimatedSprite2D"]
+target_position = Vector2(20, 0)
+enabled = true
+
+[node name="RayCastLeft" type="RayCast2D" parent="AnimatedSprite2D"]
+target_position = Vector2(-20, 0)
+enabled = true
+
+[node name="HarmZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarmZone"]
