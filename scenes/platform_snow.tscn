@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=4 uid="uid://snow_platform"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/sprites/snow-tileset.png" id="1_snowtex"]
 
