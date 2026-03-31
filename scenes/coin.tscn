@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=4 uid="uid://snow_coin"]
+
+  [ext_resource type="Script" path="res://scripts/coin.gd" id="1_coinscript"]
+  [ext_resource type="Texture2D" path="res://assets/sprites/fruit.png" id="2_cointex"]
+
+  [node name="Coin" type="Area2D"]
+  script = ExtResource("1_coinscript")
+  unique_name_in_owner = true
+
+  [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+  [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+  [node name="Pickup Sound" type="AudioStreamPlayer" parent="."]
