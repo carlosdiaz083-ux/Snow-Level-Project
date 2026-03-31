@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=4 uid="uid://snow_slime"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/slime_snow.gd" id="1_slimescript"]
 [ext_resource type="Texture2D" path="res://assets/sprites/slime_snow.png" id="2_slimetex"]
