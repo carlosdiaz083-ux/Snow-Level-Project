@@ -1,0 +1,156 @@
+[gd_scene load_steps=12 format=4 uid="uid://snow_level_main"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_gamemgr"]
+[ext_resource type="Texture2D" path="res://assets/sprites/snow-tileset.png" id="2_snowtile"]
+[ext_resource type="PackedScene" path="res://scenes/kill_zone.tscn" id="3_killzone"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://scenes/coin.tscn" id="5_coin"]
+[ext_resource type="PackedScene" path="res://scenes/Items/Checkpoint_flag.tscn" id="6_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/platform_snow.tscn" id="7_platform"]
+[ext_resource type="PackedScene" path="res://scenes/slime_snow.tscn" id="8_slime"]
+
+[sub_resource type="TileSet" id="TileSet_snow"]
+sources/0 = SubResource("TileSetAtlasSource_snow")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snow"]
+texture = ExtResource("2_snowtile")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_killzone"]
+size = Vector2(3000, 50)
+
+[node name="Snow_level" type="Node2D"]
+
+[node name="Game Manager" type="Node" parent="."]
+script = ExtResource("1_gamemgr")
+unique_name_in_owner = true
+
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="Background" type="TileMapLayer" parent="Layers"]
+tile_set = SubResource("TileSet_snow")
+modulate = Color(0.7, 0.85, 1.0, 1.0)
+
+[node name="Playground" type="TileMapLayer" parent="Layers"]
+tile_set = SubResource("TileSet_snow")
+
+[node name="Foreground" type="TileMapLayer" parent="Layers"]
+tile_set = SubResource("TileSet_snow")
+modulate = Color(0.9, 0.95, 1.0, 0.8)
+
+[node name="Kill Zone" parent="." instance=ExtResource("3_killzone")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kill Zone"]
+position = Vector2(0, 400)
+shape = SubResource("RectangleShape2D_killzone")
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+unique_name_in_owner = true
+
+[node name="Spawn_locations" type="Node2D" parent="."]
+
+[node name="Initial_spawn" type="Marker2D" parent="Spawn_locations"]
+unique_name_in_owner = true
+position = Vector2(128, -64)
+
+[node name="Checkpoints" type="Node2D" parent="Spawn_locations"]
+
+[node name="Checkpoint_1" parent="Spawn_locations/Checkpoints" instance=ExtResource("6_checkpoint")]
+position = Vector2(512, -64)
+
+[node name="Checkpoint_2" parent="Spawn_locations/Checkpoints" instance=ExtResource("6_checkpoint")]
+position = Vector2(1024, -128)
+
+[node name="Checkpoint_3" parent="Spawn_locations/Checkpoints" instance=ExtResource("6_checkpoint")]
+position = Vector2(1536, -192)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Floor_1_Platforms" type="Node2D" parent="Platforms"]
+
+[node name="Platform_1" parent="Platforms/Floor_1_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(256, -128)
+
+[node name="Platform_2" parent="Platforms/Floor_1_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(448, -160)
+
+[node name="Platform_3" parent="Platforms/Floor_1_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(640, -128)
+
+[node name="Floor_2_Platforms" type="Node2D" parent="Platforms"]
+
+[node name="Platform_4" parent="Platforms/Floor_2_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(900, -256)
+
+[node name="Platform_5" parent="Platforms/Floor_2_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(1100, -288)
+
+[node name="Platform_6" parent="Platforms/Floor_2_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(1300, -256)
+
+[node name="Floor_3_Platforms" type="Node2D" parent="Platforms"]
+
+[node name="Platform_7" parent="Platforms/Floor_3_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(1500, -384)
+
+[node name="Platform_8" parent="Platforms/Floor_3_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(1700, -416)
+
+[node name="Platform_9" parent="Platforms/Floor_3_Platforms" instance=ExtResource("7_platform")]
+position = Vector2(1900, -384)
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin_1" parent="Coins" instance=ExtResource("5_coin")]
+position = Vector2(300, -160)
+
+[node name="Coin_2" parent="Coins" instance=ExtResource("5_coin")]
+position = Vector2(500, -192)
+
+[node name="Coin_3" parent="Coins" instance=ExtResource("5_coin")]
+position = Vector2(700, -160)
+
+[node name="Coin_4" parent="Coins" instance=ExtResource("5_coin")]
+position = Vector2(950, -288)
+
+[node name="Coin_5" parent="Coins" instance=ExtResource("5_coin")]
+position = Vector2(1150, -320)
+
+[node name="Coin_6" parent="Coins" instance=ExtResource("5_coin")]
+position = Vector2(1550, -416)
+
+[node name="Coin_7" parent="Coins" instance=ExtResource("5_coin")]
+position = Vector2(1750, -448)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Floor_1" type="Node2D" parent="Enemies"]
+
+[node name="slime_1" parent="Enemies/Floor_1" instance=ExtResource("8_slime")]
+position = Vector2(350, -96)
+
+[node name="slime_2" parent="Enemies/Floor_1" instance=ExtResource("8_slime")]
+position = Vector2(600, -96)
+
+[node name="Floor_2" type="Node2D" parent="Enemies"]
+
+[node name="slime_3" parent="Enemies/Floor_2" instance=ExtResource("8_slime")]
+position = Vector2(950, -224)
+
+[node name="slime_4" parent="Enemies/Floor_2" instance=ExtResource("8_slime")]
+position = Vector2(1200, -224)
+
+[node name="Floor_3" type="Node2D" parent="Enemies"]
+
+[node name="slime_5" parent="Enemies/Floor_3" instance=ExtResource("8_slime")]
+position = Vector2(1600, -352)
+
+[node name="slime_6" parent="Enemies/Floor_3" instance=ExtResource("8_slime")]
+position = Vector2(1800, -352)
