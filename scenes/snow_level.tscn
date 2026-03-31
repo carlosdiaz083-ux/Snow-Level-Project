@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://snow_level_main"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_gamemgr"]
 [ext_resource type="Texture2D" path="res://assets/sprites/snow-tileset.png" id="2_snowtile"]
@@ -8,9 +8,6 @@
 [ext_resource type="PackedScene" path="res://scenes/Items/Checkpoint_flag.tscn" id="6_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/platform_snow.tscn" id="7_platform"]
 [ext_resource type="PackedScene" path="res://scenes/slime_snow.tscn" id="8_slime"]
-
-[sub_resource type="TileSet" id="TileSet_snow"]
-sources/0 = SubResource("TileSetAtlasSource_snow")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_snow"]
 texture = ExtResource("2_snowtile")
@@ -22,6 +19,9 @@ texture = ExtResource("2_snowtile")
 2:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_snow"]
+sources/0 = SubResource("TileSetAtlasSource_snow")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_killzone"]
 size = Vector2(3000, 50)
