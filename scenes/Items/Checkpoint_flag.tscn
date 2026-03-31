@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=4 uid="uid://snow_checkpoint"]
+
+[ext_resource type="Script" path="res://scripts/checkpoint_flag.gd" id="1_checkscript"]
+
+[node name="Checkpoint" type="AnimatedSprite2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_checkscript")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
