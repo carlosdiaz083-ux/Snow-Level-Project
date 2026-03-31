@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=4 uid="uid://snow_platform"]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/snow-tileset.png" id="1_snowtex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(47.569504, 15.671585)
+
+[node name="Platform" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(13, 9)
+texture = ExtResource("1_snowtex")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13.1692505, 9.1403885)
+shape = SubResource("RectangleShape2D_platform")
